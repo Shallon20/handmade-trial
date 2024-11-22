@@ -1,0 +1,44 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    <title>Search Results</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <h2>Hand Made Products</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Details</th>
+            <th>Update</th>
+        </tr>
+        {% for product in data.object_list %}
+        	<tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.image }}</td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Remove</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'product_details' product.id %}">Details</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" href="{% url 'update_product' product.id %}">Update</a>
+                </td>
+            </tr>
+        {% empty %}
+        	<p>No products found</p>
+        {% endfor %}
+        
+    </table>
+    </div>
+{% endblock %}
